@@ -53,7 +53,7 @@ public class Main {
         try{
             for (int i = 0; i < title.size(); i++) {
                 Class.forName("com.mysql.cj.jdbc.Driver");
-                Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/FilmDataBase","root", "Ubuntu");
+                Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/FilmDataBase", "root", "Ubuntusql");
                 PreparedStatement stmt = con.prepareStatement("insert into Films (title, genre) values (?,?)");
                 stmt.setString(1, title.get(i));
                 stmt.setString(2,genre.get(i));

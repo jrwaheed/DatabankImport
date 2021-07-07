@@ -23,9 +23,9 @@ public class Main {
         int linecounter = 0;
 
 
-        while(( movieline = br.readLine()) != null /*&& linecounter < 100*/) {
+        while(( movieline = br.readLine()) != null /*&& linecounter < 5*/) {
             ArrayList<String> temp = new ArrayList<String>(Arrays.asList(movieline.split(";")));
-            System.out.println(movieline);
+          //  System.out.println(movieline);
             title.add(temp.get(0));
             try {
                 genre.add(temp.get(13));
@@ -33,9 +33,13 @@ public class Main {
                 genre.add("NA");
             }
 
+            //If you want to use a class instead of two list
+            //myDAO.insert(myObject);
+
 
             linecounter++;
         }
+        /*
         for (String ele :title) {
             System.out.println(ele);
         }
@@ -45,19 +49,20 @@ public class Main {
         }
         System.out.println(title.size());
         System.out.println(genre.size());
-/*
+
         FilmDetails filmdatabank = new FilmDetails(title,genre);
 
         System.out.println(filmdatabank.getTitles());
 */
         try{
-            for (int i = 0; i < title.size(); i++) {
+            for (int i = 0; i <  title.size(); i++) {
                 Class.forName("com.mysql.cj.jdbc.Driver");
-                Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/FilmDataBase", "root", "Ubuntusql");
+                Connection con = DriverManager.getConnection("jdbc:mysql://192.168.56.101:3306/FilmDataBase", "jamal", "Jamal123*");
                 PreparedStatement stmt = con.prepareStatement("insert into Films (title, genre) values (?,?)");
                 stmt.setString(1, title.get(i));
                 stmt.setString(2,genre.get(i));
                 stmt.execute();
+                con.close();
             }
 
         } catch (SQLException | ClassNotFoundException e) {
